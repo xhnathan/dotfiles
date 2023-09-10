@@ -11,4 +11,16 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
+# 克隆或更新仓库
+if [ -d "$HOME/dotfiles" ]; then
+    cd $HOME/dotfiles
+    git pull
+else
+    git clone https://github.com/xhnathan/dotfiles.git $HOME/dotfiles
+fi
 
+# 复制 .zshrc
+cp $HOME/dotfiles/.zshrc $HOME/
+
+# 复制 custom 目录
+cp -r $HOME/dotfiles/custom/* $HOME/.oh-my-zsh/custom/
